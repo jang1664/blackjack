@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 
 	//s0
 	chip_remain = 500;
-	clcd_write("welcom to BJ","press any key");
+	clcd_write("welcom to BJ","press enter");
 	getchar();
 	s1:
 	clcd_clear_display();
@@ -98,8 +98,9 @@ int main(int argc, char* argv[]) {
 			clcd_clear_display();
 			clcd_write("invalid","");
 		}
-//		keyboard_read("%s",&chip_betting);
-		scanf("%d",&chip_betting);
+		printf("type your betting : ");
+		keyboard_read(&chip_betting);
+		//scanf("%d",&chip_betting);
 		betting_flag=1;
 	}while(chip_betting>chip_remain);
 
@@ -143,8 +144,9 @@ int main(int argc, char* argv[]) {
 		player_sel:
 			//int player_choice;
 			dot_write(0);
-			//keyboard_read("%d",&player_choice);
-			scanf("%d",&player_choice);
+			printf("hit : 0, stand : 1\ntype your choice : ");
+			keyboard_read(&player_choice);
+			//scanf("%d",&player_choice);
 			if(player_choice==hit){
 				player[player_count]=card[card_count]; player_count++; card_count++;
 				player_sum=add(player,player_count);
@@ -311,6 +313,25 @@ int blackjack(int a[]){
 void end(int stat){
         chip_remain = calculate_chip(stat);
 	usleep(3000000);
+	switch(stat){
+		case blackjack_win:
+			clcd_clear_display();
+			clcd_write("blackjack!","");
+			break;
+		case win:
+			clcd_clear_display();
+			clcd_write("you win!","");
+			break;
+		case lose:
+			clcd_clear_display();
+			clcd_write("you lose!","");
+			break;
+		case push:
+			clcd_clear_display();
+			clcd_write("push!","");
+			break;
+	}	
+	usleep(1500000);
         clear_all();
 }
 
