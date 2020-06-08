@@ -72,6 +72,7 @@ int main(int argc, char* argv[]) {
 	init_dot(dot);
 	init_fnd(fnd);
 	init_clcd(clcd_cmd,clcd_data);
+	clear_all();
 
 	//s0
 	chip_remain = 500;
@@ -81,12 +82,12 @@ int main(int argc, char* argv[]) {
 	clcd_clear_display();
 	if(chip_remain <= 0){
 		clcd_write("game over", "you lose");
-		led_blink_all();
+		dot_blink(3);
 		goto end;
 	}
 	else if(chip_remain >=1000){
 		clcd_write("game over","you win");
-		led_blink_all();
+		dot_blink(2);
 		goto end;
 	}
 	fnd_chip(chip_remain,0);

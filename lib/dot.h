@@ -14,4 +14,5 @@ void dot_down_shift(int decimal);
 void dot_inverse(int decimal);
 void dot_all();
 void dot_error();
+void dot_blink(int decimal);
 #endif
